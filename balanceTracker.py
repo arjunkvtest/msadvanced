@@ -1,7 +1,7 @@
 import http.client
 import json
+import time
 
-n=1
 def balance(cookie,payloadstr):
     conn = http.client.HTTPSConnection("rewards.bing.com")
     payload = payloadstr
@@ -27,12 +27,17 @@ def balance(cookie,payloadstr):
     'sec-fetch-site': 'same-origin',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.54'
     }
-    conn.request("POST", "/api/reportactivity?X-Requested-With=XMLHttpRequest", payload, headers)
-    res = conn.getresponse()
-    data = res.read()
-    data=(data.decode("utf-8"))
-    reward=json.loads(data)
-    print(reward["balance"])
+    try:
+        conn.request("POST", "/api/reportactivity?X-Requested-With=XMLHttpRequest", payload, headers)
+        res = conn.getresponse()
+        data = res.read()
+        data=(data.decode("utf-8"))
+        reward=json.loads(data)
+        print(reward["balance"])
+        conn.close
+    except:
+        print("Connection failed")
+
 
 
 accounts=[]
@@ -92,18 +97,23 @@ cookie11='MUID=0E444B44F2BA621329E759A2F31C637F; _EDGE_V=1; SRCHD=AF=SHORUN; SRC
 payload11="id=Gamification_Impression_AMC_Dashboard&hash=3dd336a029463a1e2d30ea02a5d71d5900d5dd66cc9feacbe4f6a54ca227f0c0&timeZone=330&activityAmount=1&__RequestVerificationToken=CfDJ8B11WFbxCTFJnnMMzSLrDGXQhI80KWnYM0Ywikho40FMumKArgTesZJ8X9xSUNG5JS0e_AxdyTKfuStVC_HyLOD1RBwP8hdwh0jnia2srPC8VvUn1BSIzoCXMRPDACvwxQMCi6L9zRVwFX4kWJZOsFN6ngO5la2BysQvUv4WPhzGzXvFmeJ9tCwpROLBc02NVw"
 ms11={"cookie":cookie11,"payload":payload11}
 
-accounts.append(ms1)
-accounts.append(ms2)
-accounts.append(ms3)
-accounts.append(ms4)
-accounts.append(ms5)
-accounts.append(ms6)
-accounts.append(ms7)
-accounts.append(ms8)
-accounts.append(ms9)
-accounts.append(ms10)
-accounts.append(ms11)
+#m12
+cookie12='MUID=28653603139667D61D5D24E512246613; _EDGE_V=1; SRCHD=AF=SHORUN; SRCHUID=V=2&GUID=5C9FC4FE62494D94B51B58852C9FC065&dmnchg=1; _UR=QS=0&TQS=0; CSRFCookie=0b3f08cd-a35e-4387-96ff-bf92528c3137; ANON=A=83F07EDC68379FE3CFCE08DEFFFFFFFF&E=1c2a&W=1; NAP=V=1.9&E=1bd0&C=gCpe7J00woG_YRFRh1lS5QQf_w4gpvD6RZwm0nw1h9XQM33_hBXmfg&W=1; PPLState=1; KievRPSSecAuth=FABqBBRaTOJILtFsMkpLVWSG6AN6C/svRwNmAAAEgAAACBEaGsdxfW5tKATANZwHcXODCGxram32EB6+XEP0b0xJEKgx2cgjYX49sxrWUTGw1hE7Lq8yxaNO7vK2q/2J5foiKWHPLNSvwnszG2GczB070G6IE6K2tojwdIBr8ND6JH0Lf4ORG73QfhnRzZy2XJFPZBVWeFurcCF9eEVtdEGteRuXRnOewF3XWUYN89G3vRAh95emul5BAoQ+eBLz7Gdphm3oNNcAWViz2nVc3atQW3fM7xvYTxLZmZaP6naB93Qc//P+cS9HjmqjNCQnIpC6axVfYovXXpLzoGtSlDuVwipkOLX4+2PpwjGWwqj4f5gMMQAHSsLEw3Vz86mFxeX/tVH6nSd+Ke1MPn+KIS3TKFMFFDBL1tz/mf0jlA64yhvVB/5DLrBu/0BgLMvEgSXkU0cIAq9DQ1OP6kHJnwe9ntzrrYlQ+sRqThe8ogl+bhSr3mNjYq6YFL/RI9y/GPUQoIqxh38mJPFgRb6/a5NpVMNBQYeM5trH/85wIYuGlhUW4fBQpgJxG9YeDbizEJg4wdLsmpmH5Lzn7nhXz4K6inFB+GsXHysCPgw49PlxSArDRdbQtPWYHI+z+TtQ72cWGkoUdwJjpucbH3dTFJATD0K7wuZXRzxGuL68XhtS1geQuuECcFgxB5gMyduJAaW7a9VgXE8a6YcpJcdbLcasZLFt9AcnmBMKm1rZmMmexZt0k201GHnN0x+PNiqFT2eduZIxbb4RxbYquKHU1ueFoV0ilQszPCsSHYp+06yDJAWt/YL3X+sATnr3ivLDktkf2ZG0o+CAvPE1lWKwX70EPZ0mQRtTO76S1+akLuVocNxc8mNrBrOV6zH7vhZZs7AcNbIENQVBM1UX0jqw5Xg7xTelOoC54PgPzl346LJ09tFkpnDHRU6a9NdWIKT3XgQGRChTEgRYpSHVOtjIHK3NznpCZid9sm7RlZTMVM1Q6EyzLOq3pOp7QrjS97Nqj0V0v96dzPoQR+ar8tCdHBygeaVsd8yip6gUnvYSo4XW6+Qn/DzGM4jNiXdkzvwZoVC4fY30EWZ/F63FUvrFcViXIYm1xJJGYZ4RdP3JEqJBqWu4RoyO43Sa8QYek79yMSl9J6BLy1ym0ZB+immCKFCpAL3VxHZiB8y5vkgNGoSq+10ZvYFl3cWa7VYSu4VO267qdCGbyI+cMuEH4j2PHLXB8S1PXOSQzCRgwybQmoLybP0hm+1UbPN2wpUq+OvMmZD5OskCvJX//DlyR3DwuQ738eejxNEcxIhDQ7hKnJ8JUpET4fW5CWwAVl5Cm1/3H3ZUHtbQ/QA8uqXlTrTezlk8wlrfyxbqPDY02/o5pf3qP9KWs4xOKLxfUe9PwFIdUQzr66WsOXTQA8SLdrj0doMsiB8MbUOWo23qWZVskGlQ2H04iXy8UIxWVd3S+vKesmXGgRQAbajxbrHbJzbVsxg0rLp0EM2g9/8=; _U=1rPnSp7WzXPwIqWera7ReU3zIl7D38udU-VR6GODNqEorBv7OnFCv96LZDI5ilwARar5hdTVUGldNIBAjjFomXPpkj1D4QDDAbyOBKW3yA6jB2wvQSTcQhkht2B5TAB9qBQAwM3ANZRAkqGy92iuFkN2PNchgqDqMTf9l6PeyYUc50qgb_sLKEKp9kjVuh6kn2VMF1tlgbh3d08FleFl8yg; WLS=C=930872f9bcc3694e&N=Arjun; WLID=i+GtDL7X7Ah4iJIXRBfvUy320XLHV17RsWhG/FarH4sz1Fug3qIoXD6emDb4Le+NrhEv8EclPIFn7FOmfw2i5eZEMnHiF/zhKQDQiY6mnow=; SUID=A; SRCHUSR=DOB=20230401&T=1680354118000&POEX=W; ipv6=hit=1680357719685&t=4; MUIDB=28653603139667D61D5D24E512246613; GRNID=856559ec-1e12-4b1c-afda-b5c6a48acd63; tifacfaatcs=CfDJ8B11WFbxCTFJnnMMzSLrDGWMu7i8fYFwRwZN0FUpeFm-wSeBIxcbSdJH1o3TXCl8BLCw13Z0iJAIT6_ktQfJJZpDXRnEbUkdkjHwBIio7WOX9kKHTjAy2Uc8WbbH1sWU-lZR5Y9yGJ6AlP-outk5bUra9lYJsPL3vP_4989YnPmFkd3yUowdCYA-YwA6pSGrzSu9ldHkZMJLK-Kx6TsHD9gu_rnWBKIeCljAOOj0A_E8qXskUD4NcjoMT6oXeXPnP6CfXa6X_9CPYZj5LtNGHZWZQcd8QuTc90FaWFgr1c1RQp_kNBYKSzECbhom8N4avNmYwlooWfx3dTB0wuWDmgWWRSnpG744lacl3tbo6HfnZKw4SyrW43pWzV7Oj_bR-BHCUXvxLnJ9P8G9DtbNwqgBFcAr-pK8jQ6RFp-P8xBSFsIODjseHh054y-wXNnr98sRkJBMGPMufPSaVvvsBowNRdB7aWkt3B0YP_FmJdMCmEMpf9VKV2NgiC0E8z27YVswMyHQcSqGG6XScsRKU9v5yTLOxAex3vKNkcQNFc2amnwT_it_iDXnfepkj8IuLFvR_EA1iD8zvQr3hBy5dweWHbLgLwsK87CSt3eTBNGWqR2mqspNaVdl0AVGtYRzxVjjPPPedyPRcWYTYBG9d_HSlZyKGjriBQwXLocwrNeF680mHBmbj3xJmFvw0nM28cRjURlL6n5pqQd_a-7YD72b6UsqX7w9aNtqI9C49hetVh7g-1veNAaPiaGEhkTnOtY48DfrfHrz-nhf_61E6SS8NyMWyY1JujLVBKwkHRa5CZ6R7S8S3F8yyduUj6-P7FY0g5ESEbqMhX-LjRty2hSu3FK4uXR1MF13N3BX7Prl-OsMeI1GbBXrnAQDk7PL1ciIjpT08tj8ihx2c3w4iiN0fcuX3S4XjANqkg_wFAStwTd7ictsdBFVFxLIPYKeHrq-ij7d2nekwEowoF1Q8uGp_H4OBc9yKhx0fyIS-Vh4ZUhyDZlUZ_QO7QFPYSOnoykdWsiuZk9qAg8m4Z29jzJdPlssNbF-TaOaDNZ9MacPEhjtddSB1nAtmIFEew6UuzbNfdqEcndGh9tB_Mo0ZjkcMoHJL7ExpSRUk5_5_u7TcYvV79tuly9gzIH0JPYkKcAiJG6qrV8hlv9XVJGHqM--tPmZz59POKEBeMwZRBRlSIPloT0_pV8_-cMr2T5y2UUcRUj99Syg6ovq8Wl8oCgdle0lPRuV4ks6aWN6hAR9UQSaRG0pgpR0LBGxIwlDgcOqKF4jMbUmlAr5McPE1uz2JIVKs0j2mS7e-Ws7C2prQyn1Lc0EYQcu58kfuBOnhernQ7pl3iI_h1rUttvtzIDHJkJqHhETOE__AJt9FyWmP35LVUmNtJ8Sm99Tnvb3L7-9A2Z41k7buVvRAU3asZaQwVUEX-niLY_Td54mE7i4o4LFnQxY9A9kh6ykZ6ujoZgMco6JpRzpY7VddEbqDd07YUAZE8TOTDwMPs7-dAk7IggjrwHKc4zLF2IESWETRLnXb9zSTU29iKQcW1GP3b7oKTG68e_MSNHz7M417HPzWBz_ciFAwzX1tzlxOD5b_Cuzh-6uXi843vRUblHoLllIJRevOGv9ApyoMG1MZicvFq92UlIrpEtAXVx78iidXYOyHGy_sc7R8EA1iq_roXL3WR6WvoJPpVQ7yEKe2ULn55mRPcFzprTfvlgU5wqHE_JWlYR9MWJ4nVFuZ9pB4o2dBVGbk8ey9T2aatYewsWAQj7FaCjOiiei5owRO2kt9cbpgBztErIvYRcURO826Vkba6Estnm2Pl3pjGUcq543mEl2HnemXoroZXK-cPq8nK5aIsG3SUmked_DJmKDCTJ6mpa1yBDD5bRmAhxnZNE3GZ1RrI4HXx_siktE6OgmgZEM_SLYqa6hvf48FCwpz_KEA2L-dGF6ShCBTTP59Oji8UADa75Pia700057aAy06L1v3aEsntTwKcDOKdCetCA04S9YES65sI3NsWQG5EhtPIZYaDwjThCkXozYLHNbQwBCCCVYuvXeuCOqjbg9IxlLl9D5yQAZI_Q_O-p0FsHggflN1zoGedGX4pkTFxF3wfM35cn3sf4YGZF0sb0xGKkF99VlyPz568HWqQMFyOb3UMCJZlhwK4zyJuE1ROXs0tD3XseoItWhrDFzpWEA5QGPj-UXcE9s4B7bRjP_kUqynRRtVp4d572MH7NV2Vte7mc-NDf1ZWoXTz5m2PzCVlYA3VmWC2f2lQX7HQuhSGmbiXrbteIqyx3Esw46gDVrQLUDkgzndRWVZBWo53HYs81YnaTEspLdEae_ar3Ut1pGadASEX0e-mhPl3fQssX5QS-hK3e0zbaBPfcSFPAs2Y7Gadm2FR61951AhQM9IAbM5Zqx_71ETYJmLn-chZbv8PJrPHZ4EYu6vAIndyOEeF6yiNOF-5NN9lakvOuilZEvfH2aO67bMNRU9nibAW-wRKpjVaYBFTWtZr2zltV0kEeT1NnuiR2mf3tuvkLHYvtIuHCq0b43SD-4y9XeZCy94qOd0QM2xai06ZhzeeQivqru2yf-jIrMtv6jWAGoZWrTUZC9fcXydqZ946hoIaf9rKQjjiLKFJ2XT71CRH8utTFuIR9EIzfuKIjzJwdX1M5LOXagM1JTPyW-bXoO--Ys7DRdaM3PCw_Wgu4OPO1G09_RCyvXfRYsXRO_ZcR-IR6nhLFjw48zOjfGwKZfGez_yJ31i-NCVKSkqBzYL7vbBAYLWYIB36pUbDTVhVQRg0nQHXI0-6PhkjHDpVGyBktrS87wSPDVSEJ93O4yI7O3-XduUqS-AMwI6qqGRVxBMOeOVlAogwfXteC6SQF-CAkEw5V5qUaTeOdL5q8GUtSC4PVr5QAr3br9LsdW_TRbKoCQ6tW1XX4AJPKu2YkGv6RSIpA5V53Hon8XoNoJ8IiknRrAwzdZQlpPtyN-SpGaJloKEDPXUOB4AGtRsKCwPSQNdZIdpsvPY7CN8Dl35sTpEY5fZ25DoPd02eoPoU95emGxTakA80cen0EDHZG8VKj7h5E7JU6rEhzZXKk-p-SdWt1fgtM8DHqXb_bFh6_P9MPW8Q7Y4OBjSkHWTG1hPyFRR9JCTIJmdjFdFX0oEWqjbHqU1yCE5beJnm0PA6Uma5q2jMQTifLdJXTF567AHI5pL6AtCRLlmQFpE7-04kLerS75Z0cdOC25u4vGayzgKNyIs8ktolA7mQ8Y1x0FvApwR344Wkry9cqNzIScT9yEqIWos4AZUNwZ52Boec_YgKhHuCF1NukbENz9fZ3ZAFlLnjzOFn_pDIz2tLj_wK_Qqa8re42H-TZxDugHQT0O4krHuuMZDJ68LNynb1VGgt5sqXpmpx4B_2_wCb1j902vPx4ofMhpwSn0XS6Z96NtmGnBTXgWoW4qnPoUWBKn-FLmrPa_rBx_ELYY2HClFL4elvh03y7Ckoo3bjd6MUtTNpZMgMzwS_zkiGDC6csPN4wetEo_ag4bCOgy86CoIOxGxMCUnH4HOSF15Y5gAdQQxF943TW6p6FYy0AQtByTZOSy2A; vdp=%7B%22ex%22%3Atrue%2C%22red%22%3Afalse%7D; MicrosoftApplicationsTelemetryDeviceId=c8ed0fab-9dd4-41af-a8b1-9f1eabb99ec6; MicrosoftApplicationsTelemetryFirstLaunchTime=2023-04-01T13:06:17.159Z; MSCC=NR; _clck=1sn7has|1|fae|1; _EDGE_S=SID=15314ED8EB1F612E17695C3EEAAD6025&mkt=en-US&ui=en-us; USRLOC=HS=1&ELOC=LAT=11.264599800109863|LON=75.80570220947266|N=Kozhikode%2C%20Kerala|ELT=4|; .AspNetCore.Antiforgery.icPscOZlg04=CfDJ8B11WFbxCTFJnnMMzSLrDGXFFr2EHAKeJsJcAT5-z3mHmypG4_GLFd07TsCo-d5szbjhu5KDTZJltxLbw5fm9Wz9octeHd4J4CECsx7iZYaBkM28gQPdNoExuRSErEgArlhaKUEOZJ9Fi84eH8RK1bw; _HPVN=CS=eyJQbiI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiUCJ9LCJTYyI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiSCJ9LCJReiI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiVCJ9LCJBcCI6dHJ1ZSwiTXV0ZSI6dHJ1ZSwiTGFkIjoiMjAyMy0wNC0wMVQwMDowMDowMFoiLCJJb3RkIjowLCJHd2IiOjAsIkRmdCI6bnVsbCwiTXZzIjowLCJGbHQiOjAsIkltcCI6MjB9; _SS=SID=3955D279AA8E6D2020F4C09FAB3C6C24&R=991&RB=991&GB=0&RG=0&RP=988&OCID=ML2BF0&BTQID=-&BTSTKey=-&RA=-&BTOID=-&BTQN=-&BTEC=-&BTMC=-&BTCQC=-&BTIOM=-&BTCO=-&BTRACI=-&BTTC=-; _RwBf=ilt=2&ihpd=2&ispd=0&rc=991&rb=991&gb=0&rg=0&pc=988&mtu=0&mte=0&rbb=0.0&g=0&cid=&clo=0&v=54&l=2023-04-01T07:00:00.0000000Z&lft=0001-01-01T00:00:00.0000000&aof=0&o=16&p=BINGCOPILOTWAITLIST&c=MR000T&t=336&s=2023-04-01T13:01:59.4430441+00:00&ts=2023-04-01T13:35:39.9454904+00:00&rwred=0&wls=2&lka=0&lkt=0&TH=&W=1&mta=0&e=34t1Zt5NleV1C4kARC44Kk82ZAbDFsF8y4ZdnN--pKqOwYz89At1ZX_Mr-BFnEIwEK9QjRvBnw4tVRSKM5efpskcwonKVwpLIAZM7b1inB4&A=83F07EDC68379FE3CFCE08DEFFFFFFFF; SRCHHPGUSR=SRCHLANG=en&DM=0&PV=11&BRW=MW&BRH=MT&CW=394&CH=851&SCW=394&SCH=851&DPR=2.8&UTC=330&WTS=63815946089&HV=1680356141&PRVCW=394&PRVCH=851&EXLTT=31; _uetsid=2be33870d08e11edba400116dc05071b; _uetvid=2be34a40d08e11ed9c945b14a8532df9; _clsk=19itrib|1680356279710|37|1|s.clarity.ms/collect; webisession=%7B%22impressionId%22%3A%220b7ad6ce-c355-4f43-9030-e9f2d041030e%22%2C%22sessionid%22%3A%226080aec6-5a88-42ab-8992-68900721faad%22%2C%22sessionNumber%22%3A32%7D; SRCHHPGUSR=SRCHLANG=en&BRW=XW&BRH=M&CW=1536&CH=758&SCW=1519&SCH=3682&DPR=1.3&UTC=330&DM=1&WTS=63815849103&HV=1680252946&PRVCW=1536&PRVCH=758&PV=11'
+payload12="id=Gamification_Impression_AMC_Dashboard&hash=3dd336a029463a1e2d30ea02a5d71d5900d5dd66cc9feacbe4f6a54ca227f0c0&timeZone=330&activityAmount=1&__RequestVerificationToken=CfDJ8B11WFbxCTFJnnMMzSLrDGUGBCCZ53UqnyZaiyZD2T2L0N7l-1dw1DAuysXwM9fSMQhyarIUBJRuttuXAMt3XmygzRdfYqwZWKxJhSwb3d4_YSvbkEgoE9jDY7mJ-dpL-HT_mPaZKJd3mdWRcCgjtZjWMD1sJMMxvE15ZSZybjLM09WIwaX-lqJ4-WD3MI0p3Q"
+ms12={"cookie":cookie12,"payload":payload12}
+
+
+# accounts.append(ms1)
+# accounts.append(ms2)
+# accounts.append(ms3)
+# accounts.append(ms4)
+# accounts.append(ms5)
+# accounts.append(ms6)
+# accounts.append(ms7)
+# accounts.append(ms8)
+# accounts.append(ms9)
+# accounts.append(ms10)
+# accounts.append(ms11)
+accounts.append(ms12)
 for obj in accounts:
-    print(n,"= ",end="")
-    n+=1
     balance(obj["cookie"],obj["payload"])
