@@ -4,7 +4,6 @@ import http.client
 import random
 import time
 import threading
-from datetime import datetime
 
 import logging
 import logging.handlers
@@ -205,21 +204,28 @@ ip_address = json.loads(data1)['origin']
 logger.info( ip_address)
 
 
-# datetime object containing current date and time
-now = datetime.now()
- 
 
-# dd/mm/YY H:M:S
-dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-logger.info(dt_string)
-
-
-t1 = threading.Thread(target=runUsPc, args=(30,1,))
-t2 = threading.Thread(target=runUsPc, args=(30,3,))
+t1 = threading.Thread(target=runUsPc, args=(35,3,10))
+t2 = threading.Thread(target=runUsPc, args=(35,11,20))
+t3 = threading.Thread(target=runUsPc, args=(35,21,30))
 # runUsPc(30,1)
 # runUsMob(10)
 t1.start()
 t2.start()
+t3.start()
 t1.join()
 t2.join()
+t3.join()
+t1 = threading.Thread(target=runUsMob, args=(22,3,10))
+t2 = threading.Thread(target=runUsMob, args=(22,11,20))
+t3 = threading.Thread(target=runUsMob, args=(22,21,30))
+# runUsPc(30,1)
+# runUsMob(10)
+t1.start()
+t2.start()
+t3.start()
+t1.join()
+t2.join()
+t3.join()
+
 
