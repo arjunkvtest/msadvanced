@@ -4,6 +4,22 @@ import http.client
 import random
 import time
 
+import logging
+import logging.handlers
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger_file_handler = logging.handlers.RotatingFileHandler(
+    "status.log",
+    maxBytes=1024 * 1024,
+    backupCount=1,
+    encoding="utf8",
+)
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logger_file_handler.setFormatter(formatter)
+logger.addHandler(logger_file_handler)
+
 
 def getScript( url):
     connection = http.client.HTTPSConnection("script.googleusercontent.com")
@@ -47,6 +63,7 @@ def processUsPc(cookie,num):
             conn.request("GET", "/search?q={}&form=QBLH&sp=-1&lq=0&pq=ho&sc=10-2&qs=n&sk=&cvid=90CF49F0576D4345A610043476ACEAAC&ghsh=0&ghacc=0&ghpl=".format(rex), payload, headers)
             res = conn.getresponse()
             print(res.status)
+            logger.info(res.status)
             time.sleep(1)
         except:
             print("failed")
@@ -121,7 +138,7 @@ def processUsMobV2(cookie,num):
             print("failed")
 
 def runUsPc(pcNum,start=None,end=None):
-    print("runnning Us pc")
+    logger.info("running pc")
     if (start==None and end==None):
         for user in data:
             print(user["name"],"=",end="")
@@ -182,6 +199,14 @@ url = "/macros/echo?user_content_key=OhXWUnaehAbEV70308fc-xjG7y5mOkpOYLQMrj6Na_w
 response = getScript(url)
 data=json.loads(response.read())
 
+conn = http.client.HTTPSConnection("httpbin.org")
+conn.request("GET", "/ip")
 
-# runUsPc(10)
+res = conn.getresponse()
+data = res.read().decode("utf-8")
+ip_address = json.loads(data)['origin']
+
+logger.info( ip_address)
+runUsPc(10,1)
 # runUsMob(10)
+
