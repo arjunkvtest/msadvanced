@@ -199,7 +199,7 @@ conn = http.client.HTTPSConnection("httpbin.org")
 conn.request("GET", "/ip")
 
 res = conn.getresponse()
-dict data = res.read().decode("utf-8")
+data = res.read().decode("utf-8")
 ip_address = json.loads(data)['origin']
 
 logger.info( ip_address)
