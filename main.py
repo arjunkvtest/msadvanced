@@ -65,7 +65,7 @@ def processUsPc(cookie,num):
             res = conn.getresponse()
             time.sleep(1)
         except:
-            print("failed")
+            logger.info(x)
 
 def processUsMob(cookie,num):        
     for x in range(num):
@@ -73,33 +73,34 @@ def processUsMob(cookie,num):
         conn = http.client.HTTPSConnection("www.bing.com")
         payload = ''
         headers = {
-        'authority': 'www.bing.com',
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-        'accept-language': 'en-US,en;q=0.9',
-        'cookie': cookie,
-        'referer': 'https://www.bing.com/search?q=fun&form=QBLH',
-        'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
-        'sec-ch-ua-arch': '""',
-        'sec-ch-ua-bitness': '"64"',
-        'sec-ch-ua-full-version': '"111.0.1661.62"',
-        'sec-ch-ua-full-version-list': '"Microsoft Edge";v="111.0.1661.62", "Not(A:Brand";v="8.0.0.0", "Chromium";v="111.0.5563.149"',
-        'sec-ch-ua-mobile': '?1',
-        'sec-ch-ua-model': '"Pixel 5"',
-        'sec-ch-ua-platform': '"Android"',
-        'sec-ch-ua-platform-version': '"11"',
-        'sec-fetch-dest': 'document',
-        'sec-fetch-mode': 'navigate',
-        'sec-fetch-site': 'same-origin',
-        'upgrade-insecure-requests': '1',
-        'user-agent': 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36 Edg/111.0.0.0'
-        }
+              'authority': 'www.bing.com',
+              'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+              'accept-language': 'en-US,en;q=0.9',
+              'cookie':cookie,
+              'referer': 'https://www.bing.com/?toWww=1&redig=07042FBC5A774C3CA0AB5E7DE7789776',
+              'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
+              'sec-ch-ua-arch': '""',
+              'sec-ch-ua-bitness': '"64"',
+              'sec-ch-ua-full-version': '"112.0.1722.34"',
+              'sec-ch-ua-full-version-list': '"Chromium";v="112.0.5615.49", "Microsoft Edge";v="112.0.1722.34", "Not:A-Brand";v="99.0.0.0"',
+              'sec-ch-ua-mobile': '?1',
+              'sec-ch-ua-model': '"Pixel 5"',
+              'sec-ch-ua-platform': '"Android"',
+              'sec-ch-ua-platform-version': '"11"',
+              'sec-fetch-dest': 'document',
+              'sec-fetch-mode': 'navigate',
+              'sec-fetch-site': 'same-origin',
+              'sec-fetch-user': '?1',
+              'sec-ms-gec-version': '1-112.0.1722.34',
+              'upgrade-insecure-requests': '1',
+              'user-agent': 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36 Edg/112.0.0.0'
+            }
         try:
             conn.request("GET", "/search?q={}&form=QBLH&rdr=1&rdrig=0C42BFEA1B6348AE99B724BE42E6E363".format(rex), payload, headers)
             res = conn.getresponse()
-            print(res.status)
             time.sleep(1)
         except:
-            print("failed")
+            logger.info("failed")
 
 def processUsMobV2(cookie,num):        
     print("v2")
@@ -148,28 +149,23 @@ def runUsPc(pcNum,start=None,end=None):
             processUsPc(data[i]["cookieUs"],pcNum)
 
 def runUsMob(MobNum,start=None,end=None):
-    print("running Us mob")
+    logger.info("running Us mob")
     if (start==None and end==None):
         for user in data:
             if user["version"]=='v2':
                 processUsMobV2(user["cookieUs"],MobNum)
             else:
-                print(user["name"],"=",end="")
                 processUsMob(user["cookieUs"],MobNum)
     elif(end==None):
         if data[start-1]["version"]=='v2':
-            print(data[start-1]["name"],end="=")
             processUsMobV2(data[start-1]["cookieUs"],MobNum)
         else:
-            print(data[start-1]["name"],end="=")
             processUsMob(data[start-1]["cookieUs"],MobNum)
     else:
         for i in range(start-1,end):
             if data[i]["version"]=='v2':
-                print(data[i]["name"],"=",end="")
                 processUsMobV2(data[i]["cookieUs"],MobNum)
             else:
-                print(data[i]["name"],"=",end="")
                 processUsMob(data[i]["cookieUs"],MobNum)
 
 def randomWords():
