@@ -1,0 +1,61 @@
+import http.client
+
+conn = http.client.HTTPSConnection("www.bing.com")
+payload = ''
+headers = {
+    'authority': 'www.bing.com',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'accept-language': 'en-US,en;q=0.9',
+    'avail-dictionary': '5WIuc1mB',
+    'cookie': 'MUID=255F123C9DEB6743362300D59C596601; MUIDB=255F123C9DEB6743362300D59C596601; SRCHS=PC=U531; SRCHD=AF=ANAB01; SRCHUID=V=2&GUID=09947268F07949F5BE518D2D7162655C&dmnchg=1; ipv6=hit=1680632497180&t=6; _UR=QS=0&TQS=0; MicrosoftApplicationsTelemetryDeviceId=da51c901-442f-42bf-a686-cf9c23131bf0; CSRFCookie=3a4202a7-553f-4aea-9645-424d624b49ab; SRCHUSR=DOB=20230404&T=1680628893000&POEX=W; ANON=A=004FCA7212CA91F6968D3322FFFFFFFF&E=1c2d&W=1; NAP=V=1.9&E=1bd3&C=A5UYMlXd4q4D4KfehYo0Esjcnd9Fcx7kQO7oSSrGIND2k7rfqU09iQ&W=1; PPLState=1; KievRPSSecAuth=FACqBBRaTOJILtFsMkpLVWSG6AN6C/svRwNmAAAEgAAACJZOqv+sQN8faARaAsMaxyQ4HhFPjZeh3+AsAT1DmxHPlOl2r5xPfRj1HfuKxD0Z5tkx6rHIOEuRznBmGwSsiKI5Sp/ft0tWWqlZVzzDX5hMISvjHhvndOE/0TK8R9rNKJhow8/TRquPfKkpdMBCjOiokqrvdjrMDkagvvIiG/mzEro72a8Xb6qGQ3InIjd19aF3VXxv01nfXC5Gbh1sNixplNYU7gRSOT63+wg1WXDJTD9WIvh8anwnrcCxcr/8tIGbNjTtDQ9YgyQ8BuaJ9+ZTJ/rTrJsglIYuGX1oSz56An2saQtBf9yjrFEq8cZ/qGk2J26RWygO9dCI6cCyuZ2BClqdU2oLFCZNcf0FBhVFr/w0jJQTPc0HQkUY0R59KX5fWTMG3cgxJgaWRv2zhQJrzA5p7Ri825WKK+G7fND3+T9uBt9CUAZnzKJ3hlHkXZd+FHbm3qwM1fhgBwEggvTKBTTcmJPr8MDGFEMyTMYU1UNDYDDedHPo7RwPHNPJSOi7GrbFcryWjKdy3O/HycLj0eksUBXrSTPff3ccrqc8hdDf3UBxmV0dH1SDjTVIZ9oeMH13wxlPvB7c1KwQJU4w1d4/XvT7ssvEppbXQ7seRWlSyDJu8nnPMoK4EADYye50w8ZKPH2gbEjLuurPssmK5MOSAXzy4T6r4kq2ebdUFxdXN7VejcEibtdwHdO2PaI/sgGZFWPvoURz+95DjUESmNCE8DutO3aOeR+aSsOKXagKNK+9Uuo2XPZqVMP+gTDfcsEAAhAbwFZj87XAsIbCNnGwERndY08pQpcWfDZ3wZk2pHT5jQulnH0G5XZR70IArOf5X4iOa73dtQ8MylHaHExiC6DH3c2++BV+XgFH0Yn/5GSw4W6n5XhXy1qUQ72UwaZ2tTfd6imEenGcq88qMH4ebRrlfbHY8cJgz8tB0ZBrjTdRsODC8s0K6bIsxBNbQzjjiCIP3/e8L6Uw5BKvALnQGN9huaZPZNPyohMuMC99M4Cs69s5+pxZURqLi4uMEQDuQqzkGhAeAHs8u0kUGTv+UxZGVLVEuXKO7ibcg+SyFjkLj8SpKGjbq4O7vGPduglbtOezj86kJiQaQiVTSu2jbTn++0bq86HVbJ5E0q/wwjhaKFr3KrMQ21TCpVnOV8goxCzBctFt+QBDIf/DuuL4hiPC2zZ2mTc/54MAZjh/+W9q5JduX9M1OodmYKd4eSc688eGUR1RO091/lMRi2EyahVOjaJ1480Z8Vk8RNm/mRO4AfT1FDt5UEHWQjO156fbMCBWzKaJzEqQ9o80S5Ss1Kxmavfv+jEeuXNtYsaQmdPDbaM/kynBuvJk5boAwIWAY48vj3kXg4cpG1KagxiMv16QaBLwjEdISaiCmKfXpQR4lNs6mXWMBjfLkZejwQmQskbMPw/+XaWI6ZI5YHHdsRieBoNPXsumHwRE0NQAVczBBpXfRuCtFV0jP4oyLUO53gwZvqEAUS4grJHSr4i5AgLsQZ6KlwEgWZIwUJ0UANysd5zzQ+vHi92MKMLqs6dAIE1P; _U=1g3Ke-yM2099H8y_GTnXH-1_XsLowvN-MXPP5qdstrcophEs75r2idUQRGNUM80Prk7AQWKD2Hs3r_gJYznwmIcwlVUq9x5I1qKr9yckQNN15JVGms6Xgo_hgVrug-_ZWfR57bJaTnv6NQdWTZY73b2Hng8F1iWZy0iD4e5G5_SEuYLwdXBFBVm4K_b1i9-Byddfuv9-CmyUoaYdRrvjPzmi4qJydxX5UQH3ATqHvfq8; WLS=C=7eafc4a93d650d8a&N=Sharon; SUID=A; MSCC=NR; _clck=1wlxytd|1|fah|1; ABDEF=V=13&ABDV=13&MRNB=1680629306910&MRB=0; USRLOC=HS=1&ELOC=LAT=24.461824417114258|LON=39.62296676635742|N=Bani%20Zafar%20Dist%2C%20Medina|ELT=4|; WLID=ehvN8dtK6d833RytHYm3RVtljanUl58Ndz6XK3EdiR1GCVHcc5coeUJEPWHgw5PSvn90lFjfCEC4JaRNeLLe5h+3Mpa2ohlvpezzL1m780w=; _EDGE_S=SID=1D46B2E0EC2E6C0F14B3A009EDD96D73&mkt=en-US&ui=en-us; _uetsid=ba719dd0d30d11ed885bfd2429c58b1e; _uetvid=ba71b4a0d30d11eda5ade54a3dc6ceac; _clsk=of1lg7|1680630153937|20|1|y.clarity.ms/collect; _HPVN=CS=eyJQbiI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiUCJ9LCJTYyI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiSCJ9LCJReiI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiVCJ9LCJBcCI6dHJ1ZSwiTXV0ZSI6dHJ1ZSwiTGFkIjoiMjAyMy0wNC0wNFQwMDowMDowMFoiLCJJb3RkIjowLCJHd2IiOjAsIkRmdCI6bnVsbCwiTXZzIjowLCJGbHQiOjAsIkltcCI6MTZ9; ai_session=pXnUocaQeLjHBQ8VJ8tygh|1680628900003|1680630162157; _SS=PC=U531&SID=1D46B2E0EC2E6C0F14B3A009EDD96D73&R=508&RB=508&GB=0&RG=0&RP=508&OCID=ML2BF0&RA=-&BTOID=-&BTQID=-&BTQN=-&BTEC=-&BTMC=-&BTCQC=-&BTIOM=-&BTCO=-&BTRACI=-&BTTC=-&BTSTKey=-; _RwBf=ilt=3&ihpd=2&ispd=1&rc=508&rb=508&gb=0&rg=0&pc=508&mtu=0&mte=0&rbb=0.0&g=0&cid=&clo=0&v=42&l=2023-04-04T07:00:00.0000000Z&lft=0001-01-01T00:00:00.0000000&aof=0&o=16&p=BINGCOPILOTWAITLIST&c=MR000T&t=8564&s=2023-04-04T17:22:33.4079658+00:00&ts=2023-04-04T17:42:43.5732634+00:00&rwred=0&wls=2&lka=0&lkt=0&TH=&W=1&mta=0&e=SppzUwnQlcDMqpyDSEQ2Romfxpy2YC9r9be7PS59wmCcsJ1DTuOCakc0FoOz4WehJhdpCQ-5T8-xN5izIMuJ240wyd1W1MBZpNKp2586W08&A=004FCA7212CA91F6968D3322FFFFFFFF; SRCHHPGUSR=SRCHLANG=en&PV=10.0.0&BRW=HTP&BRH=M&CW=924&CH=754&SCW=907&SCH=754&DPR=1.3&UTC=330&DM=0&EXLTT=20&WTS=63816225693&PRVCW=924&PRVCH=754&HV=1680630164; SRCHHPGUSR=SRCHLANG=en&BRW=XW&BRH=M&CW=1536&CH=758&SCW=1519&SCH=3682&DPR=1.3&UTC=330&DM=1&WTS=63815849103&HV=1680252946&PRVCW=1536&PRVCH=758&PV=10.0.0; MUIDB=0B54FE6770BA6E412A5EEC8F714D6FFA',
+    'referer': 'https://www.bing.com/',
+    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+    'sec-ch-ua-arch': '"x86"',
+    'sec-ch-ua-bitness': '"64"',
+    'sec-ch-ua-full-version': '"111.0.1661.62"',
+    'sec-ch-ua-full-version-list': '"Microsoft Edge";v="111.0.1661.62", "Not(A:Brand";v="8.0.0.0", "Chromium";v="111.0.5563.149"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-model': '""',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-ch-ua-platform-version': '"10.0.0"',
+    'sec-fetch-dest': 'document',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-user': '?1',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62'
+}
+conn.request("GET", "/search?q=boss&form=QBLH&sp=-1&ghc=1&lq=0&pq=bos&sc=10-3&qs=n&sk=&cvid=F6D3059F667B44D69F8A878AFB9BA82F&ghsh=0&ghacc=0&ghpl=", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+
+import http.client
+
+conn = http.client.HTTPSConnection("www.bing.com")
+payload = ''
+headers = {
+    'authority': 'www.bing.com',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'accept-language': 'en-US,en;q=0.9',
+    'cookie': 'MUID=15A7F5C092E1659B08B9E72993A264C4; MUIDB=15A7F5C092E1659B08B9E72993A264C4; SRCHD=AF=NOFORM; SRCHUID=V=2&GUID=184D804910E344BE90E2B100AE34C28F&dmnchg=1; _UR=QS=0&TQS=0; MicrosoftApplicationsTelemetryDeviceId=fbafb614-1466-4094-83cb-205c7c7db810; ipv6=hit=1680623042037&t=4; NAP=V=1.9&E=1bd3&C=hKSI2Hvy2xiWjEd8hFDQLyld7f6Z17PDWktxdOMbRVicTaoZsMN-hg&W=1; CSRFCookie=119df19d-1e8e-4a91-89d1-17923957fe87; SRCHUSR=DOB=20230404&T=1680619433000&POEX=W; ANON=A=B552C01DE83A9C5AFD28CE60FFFFFFFF&E=1c2d&W=2; PPLState=1; KievRPSSecAuth=FAByBBRaTOJILtFsMkpLVWSG6AN6C/svRwNmAAAEgAAACDJWEPkW4O80MARcgkEvQk53caqQkc7nd7MtudHSHf/KB/I37aV6PzwjMbDBbV8HpBJSEDW3E9BuRQazTPSrC5owjEjNvJprGiL1PftaK8n0P5/Pa9Y3buJpNSqpS1Pz9QL01t6/abw6R3PMPxwW91EPZzNMJ/tf1qpXhO/xSIP5Fx2VFJp2qcYLCG6gjYAuXNZAx6K4EYh7AEEHMptvVOdKD9cs735Z0wYiaRFPATD0m5xbmz8cMP65CA5aNEjq6B2bWWWM39RrJsXc0RicJ6VTmCUIGN04Lidv6mM2Cpf7YyA7/Aljs+cQw7dtY86ltGY5luEYrzDeJRgLHGym1PKluV95nDpIIEVDKokZO9L39CyCpa3jlnNTNjF7qIyRKtxyiS3uPbPZngOXm8a4pmHehr+v6+RCnsjCaC88dxMSMih/7LCs4XHRpSyoSJ2UEE+RF6cdKJ9kCvsoT91oOOKU975gh3HdrchDhO8t1GL3VrEPQHwsF02bgvRFMvc0q+MaZmt5Z7MHXuSqFb6d4kUc4PIhausFrcnPjOfA4jRgbX+YIYuTIBimdWnMWDa4/rNt19HqsG+17aG4EigQ2iKdGpspwdO+5Bvnt2KnmasnUHUlJ2ilGJqYyn54vLX1xD+jRRJqTIgsrXexqMRnnGgKWgHau7cVPjH3tebMSTi2invH5no8FaxZLk/+VdDsRXEmOw3qcb8moX9I6uUU+FRlctKSZEEBrAdlLBDnxtLoscS5DXXzWUIj0AKYC+bGpfA811WPulKcEeU+OMvoOcIoec2R1XQ8mLr2ZlkiUhIP51i6uOJ/6Vacj5kQCh5ZSaYYBhHggK8PjYGH0jJX99uXApW2IfnkHd7N5tO4mQZ0DRSwIWTkQrI8WuMQmviLXT1Ot0YV3QQcC693tluSorh0WX7yvEEUARx3hGAbSRtGSHb3fRVCf9jxAr768ArBWPhljBRHpUiBea1RNZKeXMg+agVDlC/077DxdX1OXSw4C9/4LOopGhf2BvaPDJqTQHs5bLxznd+BOeHJEG4Ozvmm4yYhX0oPok6N/2xck6STwxcxjsOJd5rot+yA9HgmOzndpnmoSUdsLI9y7ELAPTT5kSfMmwk5DqiYEM3Yi4vD+va56Q6UKle7jXBx/Mmjh0mijkt2fvisE2ykvoDSmFIGDE6TIZI72ZjFOzlo7oF4cOTDCudokO2QGvfvvYPNCBtyKHmIjaZM5+HR19YnBGMlroaNNK2/9JEC+TUvQL61K9RYLLlaWXYX8YBmY37ZonHuz+c3Avvv1ibZzmmY/IWuPk28quuMWbrSfeO9k1LHFgQxNNMGzeLMmbzuFVOfWdN7ZRUBrtwUsmhn6snM2a9SWAiPFpqAE1qLIlSmov5KM65T7eIF63nTkPSg88VfCh8/tefCsJZHER9TboechFVAvKwx2ty9SXUJFADqNFIur4jz+LMbyUPB45oMpyUoFw==; _U=1b19I-rGtYUXhJ69m_KPbE9lGXSsUsdRBjuVdZtaGqFZc30B8SnrPHEZWmpZaE999ejAX9mO6VfrcbXQ5NAHnICAu2quHCcaGlr7pVMyhz1_f4y9v5bfT_RNr82gJe4M5bwIoa53jzhMwh_BtZMLPJSKsnr5nqweKEXcAZotojwrvXjat8kdyIDbjWSS36yF6UcFiD1CLir_jZ-NuWxnP9A; WLS=C=9b77c1a1a56dae99&N=Arjun; WLID=yo+Ute9Girc4rBIzNLbo+kV9N+L1MUtlTN/R6SW/4GoQQ7L22q5gPAoWV8f+bo7GrqB8IYznA2pmDQINr6MIQknMbWPdQYlTeAPdezpezUQ=; SUID=A; MSCC=NR; _HPVN=CS=eyJQbiI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiUCJ9LCJTYyI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiSCJ9LCJReiI6eyJDbiI6MSwiU3QiOjAsIlFzIjowLCJQcm9kIjoiVCJ9LCJBcCI6dHJ1ZSwiTXV0ZSI6dHJ1ZSwiTGFkIjoiMjAyMy0wNC0wNFQwMDowMDowMFoiLCJJb3RkIjowLCJHd2IiOjAsIkRmdCI6bnVsbCwiTXZzIjowLCJGbHQiOjAsIkltcCI6MjZ9; ai_session=sGSzuLYK7dru8w5OBvlocP|1680619443111|1680619764238; _EDGE_S=SID=25CCF27F03916834001BE0960261694F&mkt=en-us; _SS=SID=3E188CC0902D66332EC69E2991DD67E0&R=1704&RB=1704&GB=0&RG=0&RP=1699; _RwBf=W=1&ilt=1&ihpd=1&ispd=0&rc=1704&rb=1704&gb=0&rg=0&pc=1699&mtu=0&mte=0&rbb=0.0&g=0&cid=&clo=0&v=11&l=2023-04-04T07:00:00.0000000Z&lft=0001-01-01T00:00:00.0000000&aof=0&o=16&p=BINGCOPILOTWAITLIST&c=MR000T&t=5923&s=2023-04-02T17:46:17.3074288+00:00&ts=2023-04-04T14:49:35.9570547+00:00&rwred=0&wls=2&lka=0&lkt=0&TH=&mta=0&e=_keBKxTC6Y0BVsRTralsTs0nIwdx1wSr-ZdtAD3YnsoSqhQ2u5k53zRVbUDQw9uDHIsY3qDGPGlmdb0iT6DuCQ&A=B552C01DE83A9C5AFD28CE60FFFFFFFF; USRLOC=HS=1&ELOC=LAT=16.864492416381836|LON=96.11642456054688|N=Mayangone%2C%20Yangon%20Region|ELT=4|; SRCHHPGUSR=SRCHLANG=en&PV=11&BRW=MW&BRH=MT&CW=394&CH=851&SCW=394&SCH=851&DPR=2.8&UTC=330&DM=0&HV=1680619785&WTS=63816216233&PRVCW=394&PRVCH=851; SRCHHPGUSR=SRCHLANG=en&BRW=XW&BRH=M&CW=1536&CH=758&SCW=1519&SCH=3682&DPR=1.3&UTC=330&DM=1&WTS=63815849103&HV=1680252946&PRVCW=1536&PRVCH=758&PV=10.0.0; MUIDB=0B54FE6770BA6E412A5EEC8F714D6FFA',
+    'referer': 'https://www.bing.com/search?q=super2&qs=ds&form=QBRE',
+    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+    'sec-ch-ua-arch': '""',
+    'sec-ch-ua-bitness': '"64"',
+    'sec-ch-ua-full-version': '"111.0.1661.62"',
+    'sec-ch-ua-full-version-list': '"Microsoft Edge";v="111.0.1661.62", "Not(A:Brand";v="8.0.0.0", "Chromium";v="111.0.5563.149"',
+    'sec-ch-ua-mobile': '?1',
+    'sec-ch-ua-model': '"Pixel 5"',
+    'sec-ch-ua-platform': '"Android"',
+    'sec-ch-ua-platform-version': '"11"',
+    'sec-fetch-dest': 'document',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-site': 'same-origin',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36 Edg/111.0.0.0'
+}
+conn.request("GET", "/search?q=super2&qs=ds&form=QBRE&rdr=1&rdrig=99343449331A4D2786E716B34CB7D855", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
