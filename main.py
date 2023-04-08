@@ -141,14 +141,11 @@ def runUsPc(pcNum,start=None,end=None):
     logger.info("running pc")
     if (start==None and end==None):
         for user in data:
-            print(user["name"],"=",end="")
             processUsPc(user["cookieUs"],pcNum)
     elif(end==None):
-        print(data[start-1]["name"],end="=")
         processUsPc(data[start-1]["cookieUs"],pcNum)
     else:
         for i in range(start-1,end):
-            print(data[i]["name"],"=",end="")
             processUsPc(data[i]["cookieUs"],pcNum)
 
 def runUsMob(MobNum,start=None,end=None):
@@ -156,7 +153,6 @@ def runUsMob(MobNum,start=None,end=None):
     if (start==None and end==None):
         for user in data:
             if user["version"]=='v2':
-                print(user["name"],"=",end="")
                 processUsMobV2(user["cookieUs"],MobNum)
             else:
                 print(user["name"],"=",end="")
