@@ -1,4 +1,4 @@
-name: run mainpro.py
+name: run mainpr.py
 
 on:
   schedule:
