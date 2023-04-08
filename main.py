@@ -3,6 +3,7 @@ import json
 import http.client
 import random
 import time
+import threading
 
 import logging
 import logging.handlers
@@ -203,6 +204,15 @@ data1 = res.read().decode("utf-8")
 ip_address = json.loads(data1)['origin']
 
 logger.info( ip_address)
-runUsPc(10,1)
+
+
+
+t1 = threading.Thread(target=runUsPc, args=(30,1,))
+t2 = threading.Thread(target=runUsPc, args=(30,3,))
+# runUsPc(30,1)
 # runUsMob(10)
+t1.start()
+t2.start()
+t1.join()
+t2.join()
 
