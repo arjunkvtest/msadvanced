@@ -4,6 +4,7 @@ import http.client
 import random
 import time
 import threading
+from datetime import datetime
 
 import logging
 import logging.handlers
@@ -63,8 +64,6 @@ def processUsPc(cookie,num):
         try:
             conn.request("GET", "/search?q={}&form=QBLH&sp=-1&lq=0&pq=ho&sc=10-2&qs=n&sk=&cvid=90CF49F0576D4345A610043476ACEAAC&ghsh=0&ghacc=0&ghpl=".format(rex), payload, headers)
             res = conn.getresponse()
-            print(res.status)
-            logger.info(res.status)
             time.sleep(1)
         except:
             print("failed")
@@ -205,6 +204,14 @@ ip_address = json.loads(data1)['origin']
 
 logger.info( ip_address)
 
+
+# datetime object containing current date and time
+now = datetime.now()
+ 
+
+# dd/mm/YY H:M:S
+dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+logger.info(dt_string)
 
 
 t1 = threading.Thread(target=runUsPc, args=(30,1,))
