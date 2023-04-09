@@ -65,6 +65,7 @@ def processUsPc(cookie,num):
             res = conn.getresponse()
             time.sleep(1)
         except:
+            logger.info("failed")
             logger.info(x)
 
 def processUsMob(cookie,num):        
@@ -101,9 +102,10 @@ def processUsMob(cookie,num):
             time.sleep(1)
         except:
             logger.info("failed")
+            logger.info(x)
 
 def processUsMobV2(cookie,num):        
-    print("v2")
+    logger.info("v2")
     for x in range(num):
         rex=randomWords()
         conn = http.client.HTTPSConnection("www.bing.com")
@@ -132,10 +134,10 @@ def processUsMobV2(cookie,num):
         try:
             conn.request("GET", "/search?q={}&form=QBLH&rdr=1&rdrig=0C42BFEA1B6348AE99B724BE42E6E363".format(rex), payload, headers)
             res = conn.getresponse()
-            print(res.status)
             time.sleep(1)
         except:
-            print("failed")
+            logger.info("failed")
+            logger.info(x)
 
 def runUsPc(pcNum,start=None,end=None):
     logger.info("running pc")
@@ -201,27 +203,32 @@ logger.info( ip_address)
 
 
 
-t1 = threading.Thread(target=runUsPc, args=(35,3,10))
+t1 = threading.Thread(target=runUsPc, args=(35,1,10))
 t2 = threading.Thread(target=runUsPc, args=(35,11,20))
 t3 = threading.Thread(target=runUsPc, args=(35,21,30))
+t4 = threading.Thread(target=runUsPc, args=(35,31,38))
 # runUsPc(30,1)
 # runUsMob(10)
 t1.start()
 t2.start()
 t3.start()
+t4.start()
 t1.join()
 t2.join()
 t3.join()
-t1 = threading.Thread(target=runUsMob, args=(22,3,10))
+t4.join()
+t1 = threading.Thread(target=runUsMob, args=(22,1,10))
 t2 = threading.Thread(target=runUsMob, args=(22,11,20))
 t3 = threading.Thread(target=runUsMob, args=(22,21,30))
+t4 = threading.Thread(target=runUsMob, args=(22,31,38))
 # runUsPc(30,1)
 # runUsMob(10)
 t1.start()
 t2.start()
 t3.start()
+t4.start()
 t1.join()
 t2.join()
 t3.join()
-
+t4.join()
 
