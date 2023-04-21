@@ -44,21 +44,22 @@ def processUsPc(cookie,num):
         'accept-language': 'en-US,en;q=0.9',
         'cookie': cookie,
         'referer': 'https://www.bing.com/',
-        'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+        'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
         'sec-ch-ua-arch': '"x86"',
         'sec-ch-ua-bitness': '"64"',
-        'sec-ch-ua-full-version': '"111.0.1661.62"',
+        'sec-ch-ua-full-version': '"112.0.1722.48"',
         'sec-ch-ua-full-version-list': '"Microsoft Edge";v="111.0.1661.62", "Not(A:Brand";v="8.0.0.0", "Chromium";v="111.0.5563.149"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-model': '""',
-        'sec-ch-ua-platform': '"WUsows"',
+        'sec-ch-ua-platform': '"Windows"',
         'sec-ch-ua-platform-version': '"10.0.0"',
         'sec-fetch-dest': 'document',
         'sec-fetch-mode': 'navigate',
         'sec-fetch-site': 'same-origin',
         'sec-fetch-user': '?1',
+        'sec-ms-gec-version': '1-112.0.1722.48',
         'upgrade-insecure-requests': '1',
-        'user-agent': 'Mozilla/5.0 (WUsows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62'
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.48'
         }
         try:
             conn.request("GET", "/search?q={}&form=QBLH&sp=-1&lq=0&pq=ho&sc=10-2&qs=n&sk=&cvid=90CF49F0576D4345A610043476ACEAAC&ghsh=0&ghacc=0&ghpl=".format(rex), payload, headers)
@@ -104,40 +105,6 @@ def processUsMob(cookie,num):
             logger.info("failed")
             logger.info(x)
 
-def processUsMobV2(cookie,num):        
-    logger.info("v2")
-    for x in range(num):
-        rex=randomWords()
-        conn = http.client.HTTPSConnection("www.bing.com")
-        payload = ''
-        headers = {
-        'authority': 'www.bing.com',
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-        'accept-language': 'en-US,en;q=0.9',
-        'cookie': cookie,
-        'referer': 'https://www.bing.com/search?q=super2&qs=ds&form=QBRE',
-        'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
-        'sec-ch-ua-arch': '""',
-        'sec-ch-ua-bitness': '"64"',
-        'sec-ch-ua-full-version': '"111.0.1661.62"',
-        'sec-ch-ua-full-version-list': '"Microsoft Edge";v="111.0.1661.62", "Not(A:Brand";v="8.0.0.0", "Chromium";v="111.0.5563.149"',
-        'sec-ch-ua-mobile': '?1',
-        'sec-ch-ua-model': '"Pixel 5"',
-        'sec-ch-ua-platform': '"Android"',
-        'sec-ch-ua-platform-version': '"11"',
-        'sec-fetch-dest': 'document',
-        'sec-fetch-mode': 'navigate',
-        'sec-fetch-site': 'same-origin',
-        'upgrade-insecure-requests': '1',
-        'user-agent': 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36 Edg/111.0.0.0'
-        }
-        try:
-            conn.request("GET", "/search?q={}&form=QBLH&rdr=1&rdrig=0C42BFEA1B6348AE99B724BE42E6E363".format(rex), payload, headers)
-            res = conn.getresponse()
-            time.sleep(1)
-        except:
-            logger.info("failed")
-            logger.info(x)
 
 def runUsPc(pcNum,start=None,end=None):
     logger.info("running pc")
@@ -154,21 +121,12 @@ def runUsMob(MobNum,start=None,end=None):
     logger.info("running Us mob")
     if (start==None and end==None):
         for user in data:
-            if user["version"]=='v2':
-                processUsMobV2(user["cookieUs"],MobNum)
-            else:
-                processUsMob(user["cookieUs"],MobNum)
+            processUsMob(user["cookieUs"],MobNum)
     elif(end==None):
-        if data[start-1]["version"]=='v2':
-            processUsMobV2(data[start-1]["cookieUs"],MobNum)
-        else:
-            processUsMob(data[start-1]["cookieUs"],MobNum)
+        processUsMob(data[start-1]["cookieUs"],MobNum)
     else:
         for i in range(start-1,end):
-            if data[i]["version"]=='v2':
-                processUsMobV2(data[i]["cookieUs"],MobNum)
-            else:
-                processUsMob(data[i]["cookieUs"],MobNum)
+            processUsMob(data[i]["cookieUs"],MobNum)
 
 def randomWords():
     sentence=''
