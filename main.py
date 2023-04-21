@@ -161,7 +161,7 @@ logger.info( ip_address)
 
 
 
-t1 = threading.Thread(target=runUsPc, args=(35,4,20))
+t1 = threading.Thread(target=runUsPc, args=(35,1,20))
 t2 = threading.Thread(target=runUsPc, args=(35,21,40))
 t3 = threading.Thread(target=runUsPc, args=(35,41,60))
 t4 = threading.Thread(target=runUsPc, args=(35,61,75))
@@ -173,7 +173,7 @@ t1.join()
 t2.join()
 t3.join()
 t4.join()
-t1 = threading.Thread(target=runUsMob, args=(22,4,20))
+t1 = threading.Thread(target=runUsMob, args=(22,1,20))
 t2 = threading.Thread(target=runUsMob, args=(22,21,40))
 t3 = threading.Thread(target=runUsMob, args=(22,41,60))
 t4 = threading.Thread(target=runUsMob, args=(22,61,75))
