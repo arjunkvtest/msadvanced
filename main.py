@@ -83,8 +83,8 @@ def processUsMob(cookie,num):
               'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
               'sec-ch-ua-arch': '""',
               'sec-ch-ua-bitness': '"64"',
-              'sec-ch-ua-full-version': '"112.0.1722.34"',
-              'sec-ch-ua-full-version-list': '"Chromium";v="112.0.5615.49", "Microsoft Edge";v="112.0.1722.34", "Not:A-Brand";v="99.0.0.0"',
+              'sec-ch-ua-full-version': '"112.0.1722.58"',
+              'sec-ch-ua-full-version-list': '"Chromium";v="112.0.5615.138", "Microsoft Edge";v="112.0.1722.58", "Not:A-Brand";v="99.0.0.0"',
               'sec-ch-ua-mobile': '?1',
               'sec-ch-ua-model': '"Pixel 5"',
               'sec-ch-ua-platform': '"Android"',
@@ -93,7 +93,7 @@ def processUsMob(cookie,num):
               'sec-fetch-mode': 'navigate',
               'sec-fetch-site': 'same-origin',
               'sec-fetch-user': '?1',
-              'sec-ms-gec-version': '1-112.0.1722.34',
+              'sec-ms-gec-version': '1-112.0.1722.58',
               'upgrade-insecure-requests': '1',
               'user-agent': 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36 Edg/112.0.0.0'
             }
