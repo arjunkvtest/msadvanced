@@ -150,14 +150,6 @@ url = "/macros/echo?user_content_key=OhXWUnaehAbEV70308fc-xjG7y5mOkpOYLQMrj6Na_w
 response = getScript(url)
 data=json.loads(response.read())
 #ht
-conn = http.client.HTTPSConnection("httpbin.org")
-conn.request("GET", "/ip")
-
-res = conn.getresponse()
-data1 = res.read().decode("utf-8")
-ip_address = json.loads(data1)['origin']
-
-logger.info( ip_address)
 
 
 
